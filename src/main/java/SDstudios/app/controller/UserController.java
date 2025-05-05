@@ -1,6 +1,7 @@
 package SDstudios.app.controller;
 
 import SDstudios.app.model.User;
+import SDstudios.app.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,15 +33,11 @@ public class UserController {
         }
     }
 
-    @PatchMapping("/user/{userId")
+    @PatchMapping("/user/{userId}")
     public ResponseEntity<User> updateUser(
             @PathVariable Integer userId,
-            @RequestBody Map<String, Object> updatedFields ) {
-        try {
-            User updatedUser = userService.updateUser(userId, updatedFields);
-            return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
-        } catch (UserNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+            @RequestBody Map<String, Object> updatedFields) {
+        User updatedUser = userService.updateUser(userId, updatedFields);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 }

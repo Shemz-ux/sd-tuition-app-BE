@@ -29,8 +29,6 @@ public class User {
     @NotBlank
     private String mobile;
 
-    private String additionalInfo;
-
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -41,12 +39,11 @@ public class User {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, String mobile, String additionalInfo) {
+    public User(String firstName, String lastName, String email, String mobile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobile = mobile;
-        this.additionalInfo = additionalInfo;
         this.child = new ArrayList<>();
     }
 
@@ -84,14 +81,6 @@ public class User {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
     }
 
     public List<Child> getChild() {
