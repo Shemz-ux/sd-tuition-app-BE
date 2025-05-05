@@ -27,10 +27,10 @@ public class Child {
 
     @ManyToOne
     @JoinColumn(
-            name = "user_id"
+            name = "parent_id"
     )
-    @JsonBackReference(value="user-child")
-    private User user;
+    @JsonBackReference(value="parent-child")
+    private Parent parent;
 
     public Child(){}
 
@@ -86,11 +86,11 @@ public class Child {
         this.additionalInfo = additionalInfo;
     }
 
-    public User getUser() {
-        return user;
+    public Parent getParent() {
+        return parent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }

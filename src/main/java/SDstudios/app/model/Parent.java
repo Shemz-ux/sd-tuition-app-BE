@@ -10,11 +10,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "parents")
+public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer parentId;
 
     @NotBlank
     private String firstName;
@@ -30,16 +30,16 @@ public class User {
     private String mobile;
 
     @OneToMany(
-            mappedBy = "user",
+            mappedBy = "parent",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JsonManagedReference(value = "user-child")
+    @JsonManagedReference(value = "parent-child")
     private List<Child> child;
 
-    public User() {}
+    public Parent() {}
 
-    public User(String firstName, String lastName, String email, String mobile) {
+    public Parent(String firstName, String lastName, String email, String mobile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -47,8 +47,8 @@ public class User {
         this.child = new ArrayList<>();
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getParentId() {
+        return parentId;
     }
 
     public String getFirstName() {
