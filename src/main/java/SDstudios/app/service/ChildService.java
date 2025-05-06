@@ -2,7 +2,9 @@ package SDstudios.app.service;
 
 import SDstudios.app.exception.ContentNotFoundException;
 import SDstudios.app.model.Child;
+import SDstudios.app.model.Parent;
 import SDstudios.app.repository.ChildRepository;
+import SDstudios.app.repository.ParentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -11,12 +13,17 @@ import java.util.Optional;
 @Service
 public class ChildService {
     private final ChildRepository childRepository;
+    private final ParentRepository parentRepository;
 
-    public ChildService(ChildRepository childRepository) {
+    public ChildService(ChildRepository childRepository, ParentRepository parentRepository) {
         this.childRepository = childRepository;
+        this.parentRepository = parentRepository;
     }
 
-    public Child createChild(Child child) {
+    public Child createChild(Integer parentId, Child child) {
+        Parent parent = parentRepository.findById(parentId)
+                .orElseThrow(()-> new ContentNotFoundException("Parent not found"));
+        child.setParent(parent);
         return childRepository.save(child);
     }
 

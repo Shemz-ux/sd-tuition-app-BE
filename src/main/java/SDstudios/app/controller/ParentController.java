@@ -17,13 +17,13 @@ public class ParentController {
         this.parentService = parentService;
     }
 
-    @PostMapping("/parent")
+    @PostMapping("/parents")
     public ResponseEntity<Parent> createParent(@RequestBody Parent parent) {
         Parent createdparent = parentService.createParent(parent);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdparent);
     }
 
-    @GetMapping("/parent/{parentId}")
+    @GetMapping("/parents/{parentId}")
     public ResponseEntity<Parent> getParentById(@PathVariable Integer parentId) {
         Parent parent = parentService.getParentById(parentId);
         if (parent != null) {
@@ -33,7 +33,9 @@ public class ParentController {
         }
     }
 
-    @PatchMapping("/parent/{parentId}")
+//    add a get all children by parent id controller and a delete parent
+
+    @PatchMapping("/parents/{parentId}")
     public ResponseEntity<Parent> updateParent(
             @PathVariable Integer parentId,
             @RequestBody Map<String, Object> updatedFields) {

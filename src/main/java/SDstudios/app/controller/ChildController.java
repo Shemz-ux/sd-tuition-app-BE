@@ -17,9 +17,11 @@ public class ChildController {
         this.childService = childService;
     }
 
-    @PostMapping("/child")
-    public ResponseEntity<Child> createChild(@RequestBody Child child){
-        Child createdChild = childService.createChild(child);
+    @PostMapping("/parents/{parentId}/child")
+    public ResponseEntity<Child> createChild(
+            @PathVariable Integer parentId,
+            @RequestBody Child child){
+        Child createdChild = childService.createChild(parentId, child);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdChild);
     }
 

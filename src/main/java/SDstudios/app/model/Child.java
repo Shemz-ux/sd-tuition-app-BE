@@ -3,6 +3,7 @@ package SDstudios.app.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "child")
@@ -17,12 +18,11 @@ public class Child {
     @NotBlank
     private String school;
 
-    @NotBlank
+    @NotNull
     private Integer yearGroup;
 
     @NotBlank
     private String currentGrade;
-
 
     private String additionalInfo;
 
@@ -93,5 +93,9 @@ public class Child {
 
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    public Integer getParentId() {
+        return parent.getParentId();
     }
 }
