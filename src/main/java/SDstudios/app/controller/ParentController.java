@@ -33,13 +33,21 @@ public class ParentController {
         }
     }
 
-//    add a get all children by parent id controller and a delete parent
-
     @PatchMapping("/parents/{parentId}")
     public ResponseEntity<Parent> updateParent(
             @PathVariable Integer parentId,
             @RequestBody Map<String, Object> updatedFields) {
         Parent updatedParent = parentService.updateParent(parentId, updatedFields);
         return ResponseEntity.status(HttpStatus.OK).body(updatedParent);
+    }
+
+    @DeleteMapping("/parents/{parentId}")
+    public ResponseEntity<String> deleteParent(@PathVariable Integer parentId) {
+        boolean isParentDeleted = parentService.deleteParentById(parentId);
+        if (isParentDeleted) {
+            return ResponseEntity.status(HttpStatus.OK).body("Parent profile deleted!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parent profile not found!");
+        }
     }
 }

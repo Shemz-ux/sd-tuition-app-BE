@@ -7,6 +7,7 @@ import SDstudios.app.repository.ChildRepository;
 import SDstudios.app.repository.ParentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,6 +36,14 @@ public class ChildService {
         return child.get();
     }
 
+    public List<Child> getChildrenByParentId(Integer parentId) {
+        Optional <Parent> parent = parentRepository.findById(parentId);
+        if (parent.isEmpty()) {
+            throw new ContentNotFoundException("Parent not found");
+        }
+        return childRepository.findChildByParentParentId(parentId);
+    }
+
     public Child updateChild(Integer childId, Map<String, Object> updatedFields) {
         Optional<Child> child = childRepository.findById(childId);
         Child childToUpdate = checkChildExists(child);
@@ -60,6 +69,16 @@ public class ChildService {
         }
 
         return childRepository.save(childToUpdate);
+    }
+
+    public boolean deleteChildById(Integer childId) {
+        Optional<Child> child = childRepository.findById(childId);
+        if (child.isPresent()) {
+            childRepository.deleteById(childId);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private Child checkChildExists(Optional<Child> child) {

@@ -49,11 +49,20 @@ public class ParentService {
         return parentRepository.save(originalDetails);
     }
 
+    public boolean deleteParentById(Integer parentId) {
+        Optional<Parent> parent = parentRepository.findById(parentId);
+        if (parent.isPresent()) {
+            parentRepository.deleteById(parentId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private Parent checkParentExists(Optional<Parent> parentOptional) {
         if (parentOptional.isEmpty()) {
             throw new ContentNotFoundException("Parent not found");
         }
         return parentOptional.get();
     }
-
 }
