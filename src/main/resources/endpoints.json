@@ -1,0 +1,183 @@
+{
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/parents",
+      "description": "Create a new parent profile",
+      "requestBody": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "mobile": "1234567890"
+      },
+      "responseExample": {
+        "parentId": 1,
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "mobile": "1234567890",
+        "child": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/parents/{parentId}",
+      "description": "Get a parent by ID",
+      "responseExample": {
+        "parentId": 1,
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "mobile": "1234567890",
+        "child": [
+          {
+            "childId": 1,
+            "name": "Emily Doe",
+            "school": "Greenwood High",
+            "yearGroup": 5,
+            "currentGrade": "A",
+            "additionalInfo": "Loves science"
+          }
+        ]
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/parents/{parentId}",
+      "description": "Update a parent's fields",
+      "requestBody": {
+        "firstName": "UpdatedName"
+      },
+      "responseExample": {
+        "parentId": 1,
+        "firstName": "UpdatedName",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "mobile": "1234567890",
+        "child": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/parents/{parentId}",
+      "description": "Delete a parent by ID",
+      "responseExample": "Parent profile deleted!"
+    },
+    {
+      "method": "GET",
+      "path": "/api/parents",
+      "description": "Get all parents",
+      "responseExample": [
+        {
+          "parentId": 1,
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john.doe@example.com",
+          "mobile": "1234567890",
+          "child": []
+        },
+        {
+          "parentId": 2,
+          "firstName": "Jane",
+          "lastName": "Smith",
+          "email": "jane.smith@example.com",
+          "mobile": "0987654321",
+          "child": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/parents/{parentId}/child",
+      "description": "Create a new child for a parent",
+      "requestBody": {
+        "name": "Emily",
+        "school": "Greenwood High",
+        "yearGroup": 5,
+        "currentGrade": "A",
+        "additionalInfo": "Loves science"
+      },
+      "responseExample": {
+        "childId": 1,
+        "name": "Emily",
+        "school": "Greenwood High",
+        "yearGroup": 5,
+        "currentGrade": "A",
+        "additionalInfo": "Loves science",
+        "parent": {
+          "parentId": 1
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/child/{childId}",
+      "description": "Get a child by ID",
+      "responseExample": {
+        "childId": 1,
+        "name": "Emily Doe",
+        "school": "Greenwood High",
+        "yearGroup": 5,
+        "currentGrade": "A",
+        "additionalInfo": "Loves science",
+        "parent": {
+          "parentId": 1
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/parents/{parentId}/children",
+      "description": "Get all children",
+      "responseExample": [
+        {
+          "childId": 1,
+          "name": "Emily Doe",
+          "school": "Greenwood High",
+          "yearGroup": 5,
+          "currentGrade": "A",
+          "additionalInfo": "Loves science",
+          "parent": {
+            "parentId": 1
+          }
+        },
+        {
+          "childId": 2,
+          "name": "Jack Smith",
+          "school": "Hilltop Academy",
+          "yearGroup": 6,
+          "currentGrade": "B",
+          "additionalInfo": "Plays soccer",
+          "parent": {
+            "parentId": 2
+          }
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/child/{childId}",
+      "description": "Update a child",
+      "requestBody": {
+        "school": "Updated School"
+      },
+      "responseExample": {
+        "childId": 1,
+        "name": "Emily Doe",
+        "school": "Updated School",
+        "yearGroup": 5,
+        "currentGrade": "A",
+        "additionalInfo": "Loves science",
+        "parent": {
+          "parentId": 1
+        }
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/child/{childId}",
+      "description": "Delete a child",
+      "responseExample": "Child profile deleted!"
+    }
+  ]
+}
