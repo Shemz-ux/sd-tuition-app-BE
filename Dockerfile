@@ -1,5 +1,5 @@
 # Use JDK 21 image
-FROM eclipse-temurin:21-jdk as build
+FROM eclipse-temurin:24-jdk as build
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Final runtime image (slimmed down)
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:24-jdk-alpine
 
 WORKDIR /app
 
