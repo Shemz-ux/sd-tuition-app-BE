@@ -21,7 +21,7 @@ WORKDIR /app
 # Copy the JAR from the builder image
 COPY --from=build /app/target/*.jar app.jar
 
-EXPOSE 9090
+EXPOSE 9091
 
 # Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
