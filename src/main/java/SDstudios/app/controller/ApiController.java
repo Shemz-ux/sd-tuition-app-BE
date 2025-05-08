@@ -13,14 +13,14 @@ import java.nio.file.Files;
 @RequestMapping("/api")
 public class ApiController {
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<String> getApi(){
         try {
             var resource = new ClassPathResource("endpoints.json");
             String json = new String(Files.readAllBytes(resource.getFile().toPath()));
             return ResponseEntity.ok().header("Content-Type", "application/json").body(json);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error loading Api");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error loading Api: " + e.getMessage());
         }
     }
 }
